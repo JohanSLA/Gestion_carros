@@ -1,0 +1,30 @@
+<div class="container col-sm-6 mb-4 mt-5">
+    <h2 class="mx-a text-center">Registro de Usuarios</h2>
+</div>
+
+<div class="container col-sm-3">
+    <form>
+  <div class="mb-3">
+    <label for="identificación" class="form-label">Identificación</label>
+    <input [(ngModel)]="id" type="text" class="form-control" id="id" aria-describedby="id" required="True" name="id">
+    <div id="idHelp" class="form-text">Ingresa tu numero de identificación sin puntos ni espacios.</div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input [(ngModel)]= "nombre" type="text" class="form-control" id="nombre" aria-describedby="nombre" required="True" name="nombre">
+  </div>
+
+  <div class="mb-3">
+    <label for="apellido" class="form-label">Apellido</label>
+    <input [(ngModel)]="apellido" type="text" class="form-control" id="apellido" aria-describedby="apellido" required="True" name="apellido">
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="email" required="True" name="email">
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="agregarUsuario()">Crear Usuario</button>
+</form>
+</div>
