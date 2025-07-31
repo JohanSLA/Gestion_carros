@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/usuario")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UsuarioControlador {
 
     //Inyeccion del objeto usuarioServicio a la clase UsuarioControlador para no hacer la operacion de new
@@ -21,15 +21,16 @@ public class UsuarioControlador {
     //Creacion de endpoints
 
 
-    //localhost:8080
+    //localhost:8080/api/usuario/agregar
     //@PostMapping() seria mejor?
-    @PostMapping()
+    @PostMapping("/agregar")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Usuario save(@RequestBody Usuario usuario) {
         return usuarioServicio.save(usuario);
     }
 
-    //localhost:8080/api/usuario
-    @GetMapping()
+    //localhost:8080/api/usuario/listar
+    @GetMapping("/listar")
     public List<Usuario> findAll() {
         return usuarioServicio.findAll();
     }

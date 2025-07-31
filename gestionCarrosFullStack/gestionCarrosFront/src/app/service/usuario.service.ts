@@ -9,6 +9,7 @@ import { Usuario } from '../usuario';
 export class UsuarioService {
 
   private api : string = "http://localhost:8080/api/usuario"
+
   
   constructor(private http:HttpClient) { }
 
@@ -17,7 +18,7 @@ export class UsuarioService {
    * @returns lista con usuarios
    */
   getUsuarioList():Observable<Usuario []>{
-    return this.http.get<Usuario[]>(this.api);
+    return this.http.get<Usuario[]>(this.api+"/listar");
   }
 
 
@@ -28,7 +29,7 @@ export class UsuarioService {
    * @returns 
    */
   agregarUsuario(usuario: Usuario): Observable<Usuario>{
-    return this.http.post<Usuario>(this.api, usuario)
+    return this.http.post<Usuario>(this.api+"/agregar", usuario)
   }
 
 

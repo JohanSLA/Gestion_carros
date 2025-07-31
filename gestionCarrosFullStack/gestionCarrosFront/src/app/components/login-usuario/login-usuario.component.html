@@ -1,0 +1,18 @@
+<div class="container col-sm-6 mb-4 mt-5">
+    <h2 class="mx-a text-center">Loguin Usuarios</h2>
+</div>
+
+<div class="container col-sm-3">
+    <form>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input [(ngModel)]="email" type="text" class="form-control" id="email" aria-describedby="email" name="email">
+    <div id="emailLogin" class="form-text">Ingresa el correo que registraste.</div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input [(ngModel)]="password" type="password" class="form-control" id="password" name="password">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="loguearUsuario()">Login</button>
+</form>
+</div>

@@ -3,6 +3,7 @@ package com.car.crud.gestionCarros.servicio;
 import com.car.crud.gestionCarros.entidades.Usuario;
 import com.car.crud.gestionCarros.exepciones.RecursoNoEncontradoExepcion;
 import com.car.crud.gestionCarros.repositorio.UsuarioRepositorio;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,14 +13,21 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     //Inyeccion del usuario repositorio
     private final UsuarioRepositorio usuarioRepositorio;
+    private final PasswordEncoder passwordEncoder; // Inyección de BCrypt
 
-    public UsuarioServicioImpl(UsuarioRepositorio usuarioRepositorio) {
+    public UsuarioServicioImpl(UsuarioRepositorio usuarioRepositorio, PasswordEncoder passwordEncoder) {
         this.usuarioRepositorio = usuarioRepositorio;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    //GuardarUsuario
+    
+    // Guardar usuario con contraseña encriptada
     @Override
     public Usuario save(Usuario usuario) {
+        // Verificamos que la contraseña no esté ya encriptada (solo si es necesario)
+        if (!usuario.getPassword().startsWith("$2a$")) {
+            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        }
         return usuarioRepositorio.save(usuario);
     }
 
@@ -54,4 +62,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public Usuario update(Usuario usuario) {
         return usuarioRepositorio.save(usuario);
     }
+
+
 }

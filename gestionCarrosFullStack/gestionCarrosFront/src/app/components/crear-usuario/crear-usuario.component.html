@@ -25,6 +25,11 @@
     <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="email" required="True" name="email">
   </div>
 
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input [(ngModel)]= "password" type="password" class="form-control" id="password" aria-describedby="password" required="True" name="password">
+  </div>
+
   <button type="submit" class="btn btn-primary" (click)="agregarUsuario()">Crear Usuario</button>
 </form>
 </div>

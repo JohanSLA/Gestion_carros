@@ -15,6 +15,7 @@ export class CrearUsuarioComponent implements OnInit {
   nombre: string = '';
   apellido: string = '';
   email: string = '';
+  password: string = '';
 
 
   constructor(private usuarioService : UsuarioService){
@@ -28,8 +29,8 @@ export class CrearUsuarioComponent implements OnInit {
    * Metodo que permite asociar los datos de la plantilla html al componenete para guardar un usuario
    */
   agregarUsuario(){
-    let usuario = new Usuario(this.id, this.nombre, this.apellido, this.email);
-    console.log(usuario); //para ver los datos del usuario por consola
+    let usuario = new Usuario(this.id, this.nombre, this.apellido, this.email, this.password);
+    console.log(usuario); //para ver los datos del usuario por consola (-------No olvidar borrar----)
 
     this.usuarioService.agregarUsuario(usuario).subscribe(
       res => console.log(res)
