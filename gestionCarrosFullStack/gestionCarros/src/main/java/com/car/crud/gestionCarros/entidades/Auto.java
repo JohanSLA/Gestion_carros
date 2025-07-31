@@ -1,23 +1,26 @@
 package com.car.crud.gestionCarros.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cars")
 public class Auto {
-    private String id;
 
-    @Id
+
     private String marca;
     private String modelo;
     private String ano;
 
+    @Id
     @Column(nullable = false, unique = true)
     private String placa;
     private String color;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")//LLave foranea
+    @JsonBackReference
+    private Usuario usuario;
 
 
     /*
@@ -37,13 +40,15 @@ public class Auto {
      * @param ano
      * @param placa
      * @param color
+     * @param usuario
      */
-    public Auto(String marca, String modelo, String ano, String placa, String color) {
+    public Auto(String marca, String modelo, String ano, String placa, String color, Usuario usuario) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.placa = placa;
         this.color = color;
+        this.usuario = usuario;
     }
 
 
@@ -88,6 +93,14 @@ public class Auto {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
 

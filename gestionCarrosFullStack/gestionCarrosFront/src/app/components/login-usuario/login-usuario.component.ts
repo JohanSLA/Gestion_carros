@@ -29,7 +29,7 @@ export class LoginUsuarioComponent {
 
     this.loginService.loguearUsuario(login).subscribe(
       (res: any) => {
-      console.log('Token recibido:', res.token);  // ✅ Ahora reconoce res.token
+      console.log('Token recibido:', res.token);  //imprimimos el formato json que devuelve
 
       // Guarda el token en localStorage
       localStorage.setItem('token', res.token);

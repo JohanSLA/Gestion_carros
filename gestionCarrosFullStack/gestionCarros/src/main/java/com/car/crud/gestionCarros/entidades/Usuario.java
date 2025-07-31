@@ -1,9 +1,9 @@
 package com.car.crud.gestionCarros.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -18,17 +18,25 @@ public class Usuario {
     @Column(nullable = false)
     private String password; //contraseña del usuario
 
+    //cascade permite que al eliminar el usuario se eleiminen sus autos tambien
+    //cascade = CascadeType.ALL: hace que al guardar/eliminar un usuario también se guarden o eliminen sus autos.
+    //orphanRemoval = true: si se quita un Auto de la lista, también se elimina de la base de datos.
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Auto> listaAutos;
+
     /*
     Metodos contructor de la clase
      */
 
     //Metodo contructor con parametros
-    public Usuario(String id, String nombre, String apellido, String email, String password) {
+    public Usuario(String id, String nombre, String apellido, String email, String password, List<Auto> listaAuto) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
+        this.listaAutos = listaAuto;
     }
 
     //Metodo contructor vacio
@@ -58,6 +66,10 @@ public class Usuario {
 
     public String getPassword() {return password;}
 
+    public List<Auto> getListaAutos() {
+        return listaAutos;
+    }
+
     /*
     Metodos setter de la clase
      */
@@ -79,4 +91,8 @@ public class Usuario {
     }
 
     public void setPassword(String password) {this.password = password;}
+
+    public void setListaAutos(List<Auto> listaAutos) {
+        this.listaAutos = listaAutos;
+    }
 }

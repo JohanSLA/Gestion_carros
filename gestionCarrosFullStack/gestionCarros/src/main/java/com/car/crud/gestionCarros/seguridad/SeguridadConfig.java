@@ -37,6 +37,7 @@ public class SeguridadConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login").permitAll()//Permite loguearse para suministrar token
                         .requestMatchers("/api/usuario/agregar").permitAll()//Permite registrar cualquier usuario sin token
+                        .requestMatchers("/api/auto/agregar").permitAll()//Permite registrar cualquier auto
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter.class)
                 .build();
