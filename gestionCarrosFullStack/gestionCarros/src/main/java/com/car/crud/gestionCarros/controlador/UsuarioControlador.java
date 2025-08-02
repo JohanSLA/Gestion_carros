@@ -57,10 +57,10 @@ public class UsuarioControlador {
         usuarioActualizar.setNombre(usuario.getNombre());
         usuarioActualizar.setApellido(usuario.getApellido());
         usuarioActualizar.setEmail(usuario.getEmail());
+        usuarioActualizar.setPassword(usuario.getPassword());
 
         //Retornamos el usuario actualizado
         return usuarioServicio.save(usuarioActualizar);
-
     }
 
 

@@ -1,5 +1,8 @@
 package com.car.crud.gestionCarros.dto;
 
+/**
+ * Clase con los datos necesarios para loguearse
+ */
 public class LoginRequest {
     private String email;
     private String password;

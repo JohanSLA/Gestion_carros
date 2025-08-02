@@ -25,21 +25,31 @@ export class LoginUsuarioComponent {
 
   loguearUsuario(){
     let login = new Login(this.email, this.password);
-    console.log('Se esta intentando loguear'+login.email) //Prueba para ver los datos del login (-------No olvidar borrar-----)
+    console.log('Se esta intentando loguear'+login.email) //muetsra quien esta intentando loguearse por consola
 
     this.loginService.loguearUsuario(login).subscribe(
       (res: any) => {
       console.log('Token recibido:', res.token);  //imprimimos el formato json que devuelve
 
-      // Guarda el token en localStorage
+      // Guarda el token y el id en localStorage
       localStorage.setItem('token', res.token);
+      localStorage.setItem('usuario', JSON.stringify(res.usuario)); 
 
       // Redirige al home o cualquier ruta
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     },
     err => {
       console.error('Error al loguear', err);
+      alert("Ocurrio un error al inicar, porfavor verifica tus datos e intenta nuevamente.")
     }
     );
+  }
+
+
+  /**
+   * Metodo que se ejecuta al apretar el boton para ir al login
+   */
+  irLogin(){
+    this.router.navigate(['/agregar/usuario']);
   }
 }

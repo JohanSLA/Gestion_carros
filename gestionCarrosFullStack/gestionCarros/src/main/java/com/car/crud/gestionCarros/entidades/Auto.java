@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "cars")
 public class Auto {
 
-
+    //Declaracion de atributos
     private String marca;
     private String modelo;
     private String ano;

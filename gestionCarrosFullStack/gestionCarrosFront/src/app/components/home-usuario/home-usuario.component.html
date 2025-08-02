@@ -1,0 +1,224 @@
+<section class="header">
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
+        >
+          <svg
+            class="bi me-2"
+            width="40"
+            height="32"
+            role="img"
+            aria-label="Bootstrap"
+          >
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+        </a>
+        <ul
+          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+        >
+          <li>
+            <h1>Gestion autos</h1>
+          </li>
+        </ul>
+        <form
+          class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+          role="search"
+        ></form>
+        <div class="dropdown text-end">
+          <a
+            href="#"
+            class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt="mdo"
+              width="32"
+              height="32"
+              class="rounded-circle"
+            />
+          </a>
+          <ul class="dropdown-menu text-small">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarModalUsuario" (click)="prepararUsuario()">Modificar tus datos</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" (click)="cerrarUsuario()">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+</section>
+
+
+<section class="body">
+  <div class="container">
+    <div class="row justify-content-center">
+      <!-- Formulario de Registro -->
+      <div class="col-12 col-lg-4 mb-4 justify-content-center">
+        <div class="container col-sm-12 mt-4">
+          <h2 class="text-center">Registro de Auto</h2>
+        </div>
+        <div class="container col-sm-12">
+          <form #formulario="ngForm" (ngSubmit)="agregarAuto()" novalidate>
+            <div class="mb-3">
+              <label for="placa" class="form-label">Placa</label>
+              <input [(ngModel)]="placa" type="text" class="form-control" id="placa" required name="placa" />
+              <div id="idHelp" class="form-text">Ingresa la placa de tu vehículo.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="ano" class="form-label">Año del vehículo</label>
+              <input [(ngModel)]="ano" type="text" class="form-control" id="ano" required name="ano" />
+            </div>
+
+            <div class="mb-3">
+              <label for="color" class="form-label">Color</label>
+              <input [(ngModel)]="color" type="text" class="form-control" id="color" required name="color" />
+            </div>
+
+            <div class="mb-3">
+              <label for="marca" class="form-label">Marca</label>
+              <input [(ngModel)]="marca" type="text" class="form-control" id="marca" required name="marca" />
+            </div>
+
+            <div class="mb-3">
+              <label for="modelo" class="form-label">Modelo</label>
+              <input [(ngModel)]="modelo" type="text" class="form-control" id="modelo" required name="modelo" />
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary ms-2 my-1" [disabled]="!formulario.valid">Registrar auto</button>
+              <button type="button" class="btn btn-secondary ms-2" (click)="limpiarInputs()">Limpiar campos</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tabla de Autos -->
+      <div class="col-12 col-lg-8">
+        <div class="container mt-4 mb-3">
+          <h2 class="text-center">Autos registrados</h2>
+        </div>
+        <div class="container">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Placa</th>
+                <th scope="col">Año</th>
+                <th scope="col">Color</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Modificar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let auto of autos">
+                <th scope="row">{{ auto.placa }}</th>
+                <td>{{ auto.ano }}</td>
+                <td>{{ auto.color }}</td>
+                <td>{{ auto.marca }}</td>
+                <td>{{ auto.modelo }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="eliminarAuto(auto.placa)">Eliminar</button>
+                </td>
+                <td>
+                  <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal" (click)="prepararAuto(auto)">Modificar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="footer"></section>
+
+<!-- Modal para editar auto -->
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Editar Auto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Año</label>
+            <input [(ngModel)]="autoSeleccionado.ano" name="ano" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Color</label>
+            <input [(ngModel)]="autoSeleccionado.color" name="color" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Marca</label>
+            <input [(ngModel)]="autoSeleccionado.marca" name="marca" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Modelo</label>
+            <input [(ngModel)]="autoSeleccionado.modelo" name="modelo" type="text" class="form-control" />
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="actualizarAuto()">Guardar cambios</button>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para editar usuarios -->
+<div class="modal fade" id="editarModalUsuario" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Apellido</label>
+            <input [(ngModel)]="usuarioSeleccionado.apellido" name="apellido" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input [(ngModel)]="usuarioSeleccionado.email" name="email" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input [(ngModel)]="usuarioSeleccionado.nombre" name="nombre" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input [(ngModel)]="usuarioSeleccionado.password" name="password" type="password" class="form-control" />
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="actualizarUsuario()">Guardar cambios</button>
+      </div>
+    
+    </div>
+  </div>
+</div>
+

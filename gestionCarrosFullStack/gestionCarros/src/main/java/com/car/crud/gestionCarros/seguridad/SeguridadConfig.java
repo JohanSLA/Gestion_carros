@@ -17,7 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 /**
- * Agregamos todo lo necesario para el bloqueo de url o acceso
+ * Agregamos todo lo necesario para el bloqueo de url (proteger endpoints)
  */
 @Configuration
 public class SeguridadConfig {

@@ -31,7 +31,7 @@ public class AutoControlador {
     @GetMapping("/listar")
     public List<Auto> findAll() {return autoServicio.findAll();}
 
-    //http://localhost:8080/autos/listar/autos
+    //http://localhost:8080/api/auto/listar/autos/idUsuario
     @GetMapping("/listar/autos/{idUsuario}")
     public List<Auto> findByUsuario(@PathVariable String idUsuario) {return autoServicio.findByUsuario(idUsuario);}
 
@@ -51,11 +51,10 @@ public class AutoControlador {
         autoActualizar.setAno(auto.getAno());
         autoActualizar.setColor(auto.getColor());
 
-
         return autoServicio.save(autoActualizar);
     }
 
-
+    //http://localhost:8080/api/autos/eliminar/placa
     @DeleteMapping("/eliminar/{placa}")
     public void eliminar(@PathVariable String placa) {
         autoServicio.deleteById(placa);
